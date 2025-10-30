@@ -1,0 +1,42 @@
+import cv2 #opencv library
+from collections import deque #double-ended queue for storing points
+
+#Emotion happy, emotion sad
+
+#making a function to change the text that is being displayed
+def put_text(img, text, org = (30,40), scale =1, color = (0,255,0), thickness = 2):
+    cv2.putText(img, text, org, cv2.FONT_HERSHEY_SIMPLEX, scale, color, thickness, cv2.LINE_AA)
+
+def run_face():
+    face_xml =cv2.data.haarcascades + "haarcascades_frontalface_default.xml"
+    smile_xml = cv2.data.haarcasades + "haarcascades_smile.xml"
+
+    face_cascade = cv2.CascadeClassifier(face_xml)
+    smile_cascade = cv2.CascadeClassifier(smile_xml)
+
+    cap = cv2.VideoCapture(0) #short for capture. Using the camera
+
+    #error handling
+    if not cap.isOpened():
+        print("Could not Open Camera")
+        return
+    
+    happy_votes = deque(maxlen=15)
+
+    while(True):
+        ok, frame = cap.read()
+        if not ok:
+            break
+        
+        frame = cv2.flip(frame, 1) #flips the image so it looks like a mirror
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        faces = face_cascade.detectMultiScale(gray, scaleFactor= 1.1, minNeighbors=5, minSize=[120,120])
+
+        label = "no face" # happy, sad, no face
+        color = (0,0,255)
+        
+        for(x,y,w,h) in faces[:1]:
+            cv2.rectangle(frame, [x,y], [x+w, y+h], (100,200,255), 1) # passes in x,y that comes from faces
+
+            roi =  gray #region of interes
