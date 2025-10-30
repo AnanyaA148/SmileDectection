@@ -62,3 +62,8 @@ def run_face():
             color = (0,255,0)
         else:
             color = (0,255,255)
+
+        break
+    put_text(frame, f"Expression: {label}", (30,40), 1.0, color, 2)
+
+    put_text(frame, "press q to quit")
