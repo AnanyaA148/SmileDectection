@@ -8,8 +8,8 @@ def put_text(img, text, org = (30,40), scale =1, color = (0,255,0), thickness = 
     cv2.putText(img, text, org, cv2.FONT_HERSHEY_SIMPLEX, scale, color, thickness, cv2.LINE_AA)
 
 def run_face():
-    face_xml =cv2.data.haarcascades + "haarcascades_frontalface_default.xml"
-    smile_xml = cv2.data.haarcasades + "haarcascades_smile.xml"
+    face_xml =cv2.data.haarcascades+ "haarcascades_frontalface_default.xml"
+    smile_xml = cv2.data.haarcascades + "haarcascades_smile.xml"
 
     face_cascade = cv2.CascadeClassifier(face_xml)
     smile_cascade = cv2.CascadeClassifier(smile_xml)
