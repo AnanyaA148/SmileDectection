@@ -66,4 +66,7 @@ def run_face():
         break
     put_text(frame, f"Expression: {label}", (30,40), 1.0, color, 2)
 
-    put_text(frame, "press q to quit")
+    put_text(frame, "press q to quit", (30, frame.shape[0]-20), 0.6, (180,180,180), 1)
+
+    cv2.imshow("Face: Happy vs Sad", frame)
+
