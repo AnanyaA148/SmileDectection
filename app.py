@@ -39,4 +39,18 @@ def run_face():
         for(x,y,w,h) in faces[:1]:
             cv2.rectangle(frame, [x,y], [x+w, y+h], (100,200,255), 1) # passes in x,y that comes from faces
 
-            roi =  gray #region of interes
+            roi_gray =  gray[y:y+h, x:x+w] #region of interest
+            roi_color = frame[y:y+h, x:x+w]
+
+            mouth = roi_gray[h//2:h, 0, w] #bottom half of rectangle
+
+            smiles = smile_cascade.detectMultiScale(
+                mouth,
+                scaleFactor=1.1,
+                minNeighbors= 18, #reduces the amount of fall negatives in our model with a threshold
+                minSize= [30,30] 
+            ) 
+        is_happy = len(smiles) > 0
+        happy_votes.append(1 if is_happy else 0)
+        
+        
