@@ -52,5 +52,13 @@ def run_face():
             ) 
         is_happy = len(smiles) > 0
         happy_votes.append(1 if is_happy else 0)
-        
-        
+
+        if score >= 0.5:
+            label = "happy" 
+        else:
+            label = "sad"
+
+        if label  == "happy":
+            color = (0,255,0)
+        else:
+            color = (0,255,255)
