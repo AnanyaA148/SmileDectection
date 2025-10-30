@@ -50,23 +50,25 @@ def run_face():
                 minNeighbors= 18, #reduces the amount of fall negatives in our model with a threshold
                 minSize= [30,30] 
             ) 
-        is_happy = len(smiles) > 0
-        happy_votes.append(1 if is_happy else 0)
+            is_happy = len(smiles) > 0
+            happy_votes.append(1 if is_happy else 0)
 
-        if score >= 0.5:
-            label = "happy" 
-        else:
-            label = "sad"
+            if score >= 0.5:
+                label = "happy" 
+            else:
+                label = "sad"
 
-        if label  == "happy":
-            color = (0,255,0)
-        else:
-            color = (0,255,255)
+            if label  == "happy":
+                color = (0,255,0)
+            else:
+                color = (0,255,255)
 
-        break
-    put_text(frame, f"Expression: {label}", (30,40), 1.0, color, 2)
+            break
+        put_text(frame, f"Expression: {label}", (30,40), 1.0, color, 2)
 
-    put_text(frame, "press q to quit", (30, frame.shape[0]-20), 0.6, (180,180,180), 1)
+        put_text(frame, "press q to quit", (30, frame.shape[0]-20), 0.6, (180,180,180), 1)
 
-    cv2.imshow("Face: Happy vs Sad", frame)
+        cv2.imshow("Face: Happy vs Sad", frame)
 
+        if(cv2.waitKey(1) & 0xFF ==ord('q')):
+            break
